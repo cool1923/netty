@@ -9,7 +9,7 @@ public class TestServerinitializer extends ChannelInitializer<SocketChannel> {
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
         ChannelPipeline pipeline =socketChannel.pipeline();
-        //编码解码合二为一
+        //编码解码合二为一哦哦哦
         pipeline.addLast("httpServerCodec",new HttpServerCodec());
         pipeline.addLast("testHttpServerHandler",new TestHttpServerHandler());
     }

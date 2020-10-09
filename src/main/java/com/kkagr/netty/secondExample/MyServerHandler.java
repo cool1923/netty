@@ -13,7 +13,7 @@ public class MyServerHandler extends SimpleChannelInboundHandler<String> {
     }
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("来自服务端的问候");
+        System.out.println("来自服务端的问");
     }
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
