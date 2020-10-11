@@ -16,13 +16,18 @@ public class NettyServer {
             ServerBootstrap server =new ServerBootstrap();//是一个启动NIO服务的辅助启动类
             server.group(bossGroup,workerGroup )
                     .channel(NioServerSocketChannel.class)  // 这里告诉Channel如何接收新的连接
-                    .childHandler(new ChannelInitializer<SocketChannel>() {
+                    .childHandler(new ChannelInitializer<SocketChannel>() {//闭包用法
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
                             // 自定义处理类
                             ch.pipeline().addLast(new NettyServerHandler());
                         }
                     });
+            //分类用法
+                    //.childHandler(new SimpleChatServerInitializer());
+
+
+
             server.option(ChannelOption.SO_BACKLOG,128);
             server.childOption(ChannelOption.SO_KEEPALIVE, true);
             ChannelFuture f = server.bind(port).sync();// 绑定端口，开始接收进来的连接
