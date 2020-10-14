@@ -1,6 +1,7 @@
 package com.kkagr.netty.thirdExample;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -23,12 +24,22 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
             byte[] bytes =new byte[readableBytes];
             in.readBytes(bytes);
             String sss= byteArrToHex(bytes);
+            String sss0= in.toString();
            // System.out.println(new String(bytes));
             System.out.println(sss);
             //System.out.print(in.toString(CharsetUtil.UTF_8));
+            String rmsg="66666";//返回的信息
+            ByteBuf sliced =in.slice(1,10);
+
+            ByteBuf in2= Unpooled.copiedBuffer(sliced);//进行处理
+            ctx.writeAndFlush(in2).sync();
 
          //   logger.error("服务端接受的消息 : " + msg);
-        }finally {
+        }catch (Exception e){
+            e.printStackTrace();
+           // System.out.println(e.toString());
+        }
+        finally {
             // 抛弃收到的数据
             ReferenceCountUtil.release(msg);
         }
