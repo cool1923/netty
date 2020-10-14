@@ -31,7 +31,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
             String rmsg="66666";//返回的信息
             ByteBuf sliced =in.slice(1,10);
 
-            ByteBuf in2= Unpooled.copiedBuffer(sliced);//进行处理
+            ByteBuf in2= Unpooled.copiedBuffer(bytes);//进行处理
             ctx.writeAndFlush(in2).sync();
 
          //   logger.error("服务端接受的消息 : " + msg);
