@@ -1,6 +1,7 @@
 package com.kkagr.netty.thirdExample;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -23,7 +24,8 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
             int readableBytes = in.readableBytes();
             byte[] bytes =new byte[readableBytes];
             in.readBytes(bytes);
-            String sss= byteArrToHex(bytes);
+            String sss = ByteBufUtil.hexDump(bytes);
+           // String sss= byteArrToHex(bytes);
             String sss0= in.toString();
            // System.out.println(new String(bytes));
             System.out.println(sss);
